@@ -15,12 +15,14 @@ function createUser() {
 };
 
 function createClass() {
-    
+
     let className = document.getElementById('className');
     let courseNumber = document.getElementById('courseNumber');
     let classDescrip = document.getElementById('classDescrip');
+    let subjectArea = document.getElementById('subjectArea');
+    let credits = document.getElementById('credits');
 
-    classList.push({className, courseNumber, classDescrip});
+    classList.push({className, courseNumber, classDescrip, subjectArea, credits});
 };
 
 function deleteClass(courseNumber) {  
