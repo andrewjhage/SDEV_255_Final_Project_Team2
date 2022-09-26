@@ -177,7 +177,3 @@ start = "vscode-css-language-server --stdio"
 
 [gitHubImport]
 requiredFiles = [".replit", "replit.nix", ".config"]
-
-[auth]
-pageEnabled = false
-buttonEnabled = false
