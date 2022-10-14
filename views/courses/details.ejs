@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("../partials/header.ejs") %>
+
+    <body>
+      <!-- Navbar-->
+      <%- include("../partials/nav.ejs") %>
+
+      <h1><%= course.courseName%> - <%= course.courseNumber%></h1>
+      <br>
+      <h3>Department: <%= course.subjectArea%></h3>
+      <h5>Credit Hours: <%= course.credits%></h5>
+      <p><%= course.courseDescript%></p>
+
+      <% if (teacher) { %>
+      <div class="updateCourse">
+        <h2>Update a Course</h2>
+        <h5>Current information is provided in the fields below, make any edits necessary and click 'Update Course Info'. Reset will only work to retrieve the current information before anything has been submitted.</h5>
+    
+        <form action="/courses/<%= course._id %>" method="POST" id='updateCourseForm'>
+          <h3>Current Information: </h3><br>
+          <label for="courseName">Course Name: </label>
+          <input type="text" id='courseName' name='courseName' value="<%= course.courseName%>"><br><br>
+          <label for='courseNumber'>Course Number: </label>
+          <input type="text" id='courseNumber' name='courseNumber' value="<%= course.courseNumber%>"><br><br>
+          <label for='courseDescrip'>Course Description: </label>
+          <input type="text" id='courseDescrip' name='courseDescript' value="<%= course.courseDescript%>"><br><br>
+          <label for='subjectArea'>Subject Area: </label>
+          <input type="text" id='subjectArea' name='subjectArea' value="<%= course.subjectArea%>"><br><br>
+          <label for='credits'>Credit Hours </label>
+          <input type="text" id='credits' name='credits' value="<%= course.credits%>"><br><br>
+      
+          <input type="submit" value="Update Course Info" id='updateBtn'>
+          <input type="button" value="Reset" class='clearBtn' id='clearBtn' >
+      
+        </form>
+    
+      </div>
+      <br>
+
+      <div class="deleteCourse">
+        <form id='deleteCourseForm' data-doc="<%= course._id %>" >
+          <input type="button" value="Delete Course" class='courseDeleteBtn' data-doc="<%= course._id %>">
+        </form>
+      </div>
+
+      <% } %>
+
+      <script>
+        const trashcan = document.querySelector('input.courseDeleteBtn');
+        const clear = document.querySelector('input.clearBtn');
+        trashcan.addEventListener('click', (e) => {
+          const endpoint = `/courses/${trashcan.dataset.doc}`;
+            fetch(endpoint, {
+              method: 'DELETE',
+            })
+           .then((response) => response.json())
+           .then((data) => window.location.href = data.redirect)
+           .catch((err) => console.log(err));
+          
+        });
+
+        clear.addEventListener('click', (e) => {
+          document.getElementById('updateCourseForm').reset();
+          console.log('form reset');
+        });
+
+
+      </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <%- include("../partials/footer.ejs") %>
+
+</body>
+
+</html>

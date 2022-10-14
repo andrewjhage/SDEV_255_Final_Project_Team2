@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("./partials/header.ejs") %>
+
+    <body>
+      <!-- Navbar-->
+      <%- include("./partials/nav.ejs") %>
+    
+      <!-- Showcase -->
+      <%- include("./partials/showcase.ejs") %>
+
+      <form id="studentForm">
+        <h2>Student Log In</h2>
+         <label for="username">Username</label>
+         <input type="text" name="username"/><br><br>
+         <div class="student username error"></div>
+         <label for="password">Password</label>
+         <input type="password" name="password"/><br>
+         <div class="student password error"></div>
+         <button>Log In</button>
+      </form>
+      <br>
+
+      <form id="teacherForm">
+        <h2>Teacher Log In</h2>
+         <label for="username">Username</label>
+         <input type="text" name="username"/><br><br>
+         <div class="username error"></div>
+         <label for="password">Password</label>
+         <input type="password" name="password"/><br>
+         <div class="password error"></div>
+         <button>Log In</button>
+      </form>
+
+      <script>
+    //student
+    const studentForm = document.getElementById('studentForm');
+    const studentusernameError = document.getElementsByName('student username error');
+    const studentpasswordError = document.getElementsByName('student password error');
+    //teacher
+    const teacherForm = document.getElementById('teacherForm');
+    const teacherusernameError = document.getElementsByName('teacher username error');
+    const teacherpasswordError = document.getElementsByName('teacher password error');
+    
+    studentForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        //reset errors
+        studentusernameError.textContent = '';
+        studentpasswordError.textContent = '';
+
+        //get the values
+        const username = studentForm.username.value;
+        const password = studentForm.password.value;
+
+        try {
+            const res = await fetch('/student/login', {
+                method: 'POST',
+                body: JSON.stringify({username, password}),
+                headers: { 'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            if(data.errors) {
+                studentusernameError.textContent = data.errors.username;
+                studentpasswordError.textContent = data.errors.password;
+
+            }
+            if(data.student) {
+                location.assign('/');
+            }
+
+        }catch (err) {
+            console.log(err);
+        }
+    });
+
+    teacherForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        //reset errors
+        teacherusernameError.textContent = '';
+        teacherpasswordError.textContent = '';
+
+        //get the values
+        const username = teacherForm.username.value;
+        const password = teacherForm.password.value;
+
+        try {
+            const res = await fetch('/teacher/login', {
+                method: 'POST',
+                body: JSON.stringify({username, password}),
+                headers: { 'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            console.log(data);
+            if(data.errors) {
+                teacherusernameError.textContent = data.errors.username;
+                teacherpasswordError.textContent = data.errors.password;
+
+            }
+            if(data.teacher) {
+                location.assign('/');
+            }
+
+        }catch (err) {
+            console.log(err);
+        }
+    });
+
+
+      </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+<%- include("./partials/footer.ejs") %>
+
+</body>
+
+</html>

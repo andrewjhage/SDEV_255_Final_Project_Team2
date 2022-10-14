@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include("./partials/header.ejs") %>
+
+    <body>
+      <!-- Navbar-->
+      <%- include("./partials/nav.ejs") %>
+    
+      <!-- Showcase -->
+      <%- include("./partials/showcase.ejs") %>
+      
+      <div class="addClass">
+        <h2>Register for a Class</h2>
+    
+        <form action="/register" method="POST" id='registerForm' >
+          <label for='courseNumber'>Course Number: </label>
+          <input type="text" id='courseNumber' name='courseNumber'><br><br>   
+          <input type="submit" value="Add Course" id='registerBtn'>
+      
+        </form>
+    
+    
+      </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+    <%- include("./partials/footer.ejs") %>
+
+</body>
+
+</html>
