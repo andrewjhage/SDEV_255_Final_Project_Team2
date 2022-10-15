@@ -12,25 +12,57 @@
 
       <div class="blogs content">
         <h2>All Courses</h2>
-
-        <% if (courses.length > 0) { %>
-            <% courses.forEach(course => { %>
-            <a class="single" href="/courses/<%= course._id%>">
-                <h2 class="courseNumber"> <%= course.courseNumber%></h2>
-                <h3 class="courseName"><%= course.courseName%></h3>
-            </a>
-            <% }) %>
-        <% } else { %>
-            <p>There are no courses to display...</p>
-        <% } %>
+        <p>Search by course number below</p>
+      
+        <input type='text' id='textID' placeholder='Search Courses...'>
+        <button type='submit' id='searchSubmit'>Submit</button>
+        <p id='noResults'></p>
+        <h2 id='searchResultsNumber'></h2>
+        <h3 id='searchResultsName'></h3>
+        
+        <div id='displayCourses'>
+          <% if (courses.length > 0) { %>
+              <% courses.forEach(course => { %>
+              <a class="single" href="/courses/<%= course._id%>">
+                  <h2 class="courseNumber"> <%= course.courseNumber%></h2>
+                  <h3 class="courseName"><%= course.courseName%></h3>
+              </a>
+              <% }) %>
+          <% } else { %>
+              <p>There are no courses to display...</p>
+          <% } %>
+        </div>
 
      </div>
 
      <%- include("../partials/footer.ejs") %>
 
+  <script>
+    document.getElementById('searchSubmit').addEventListener('click', searchClass);
+
+    function searchClass(){
+      
+      const classNumber = document.getElementById('textID').value;
+      const searchResultsNumber = document.getElementById('searchResultsNumber');
+      const searchResultsName = document.getElementById('searchResultsName');
+
+      if (courses.length > 0) {
+        document.getElementById('displayCourses').innerHTML='';
+        courses.forEach(course => {
+          if (course.courseNumber == classNumber) {
+            searchResultsNumber.innerHTML = course.courseNumber
+            searchResultsName.innerHTML = course.courseName
+          } else {
+            document.getElementById('noResults').innerHTML='There are no courses with that course number.'
+          }
+        });
+      }; 
+    };
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
