@@ -6,7 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const coursesRoutes = require('./routes/coursesRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware');
-const { Student } = require('./models/User');
+const { Student, Teacher } = require('./models/User');
 
 
 //express app
@@ -36,7 +36,17 @@ app.get('/account', requireAuth, (req, res) => {
   const student = req.cookies.user;
   const teacher = req.cookies.teacher;
   if (teacher) {
-    res.render('account', { title: 'User Account', classList: [] });
+    jwt.verify(teacher, 'sdev 255 final teacher', async (err, decodedToken) => {
+      if (err) {
+        console.log(err.message);
+      }else {
+        await Teacher.findById(decodedToken.id)
+        .then((result) => {
+          res.render('account', { title: 'User Account', classList: [], user: result});
+        });
+      }
+  
+    });
   } else {
   jwt.verify(student, 'sdev 255 final', async (err, decodedToken) => {
     if (err) {
@@ -44,7 +54,7 @@ app.get('/account', requireAuth, (req, res) => {
     }else {
       await Student.findById(decodedToken.id)
       .then((result) => {
-        res.render('account', { title: 'User Account', classList: result.classes });
+        res.render('account', { title: 'User Account', classList: result.classes, user: result});
       });
     }
 

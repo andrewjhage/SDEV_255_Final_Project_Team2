@@ -3,16 +3,15 @@ const jwt = require('jsonwebtoken');
 
 // handle errors
 const handleErrors = (err) => {
-  console.log(err.message, err.code);
   let errors = { username: '', password: '' };
 
   // incorrect username
-  if (err.message === 'incorrect username') {
+  if (err.message === 'Incorrect username') {
     errors.username = 'That username is not registered';
   }
 
   // incorrect password
-  if (err.message === 'incorrect password') {
+  if (err.message === 'Incorrect password') {
     errors.password = 'That password is incorrect';
   }
 
@@ -23,11 +22,14 @@ const handleErrors = (err) => {
   }
 
   // validation errors
-  if (err.message.includes('user validation failed')) {
-    // console.log(err);
+  if (err.message.includes('Student validation failed')) {
     Object.values(err.errors).forEach(({ properties }) => {
-      // console.log(val);
-      // console.log(properties);
+      errors[properties.path] = properties.message;
+    });
+  }
+
+  if (err.message.includes('Teacher validation failed')) {
+    Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
     });
   }
@@ -92,7 +94,6 @@ const student_login_post = async (req, res) => {
     res.status(200).json({ student: student._id });
   } 
   catch (err) {
-    console.log(err);
     const errors = handleErrors(err);
     res.status(400).json({ errors });
   }
@@ -114,6 +115,7 @@ const student_login_post = async (req, res) => {
     
     }
     catch(err) {
+      console.log(err);
       const errors = handleErrors(err);
       res.status(400).json({ errors });
     }

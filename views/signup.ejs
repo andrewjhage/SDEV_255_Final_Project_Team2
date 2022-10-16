@@ -19,13 +19,12 @@
          <input type="text" name="fName" required><br><br>
          <label for="lName">Last Name: </label>
          <input type="text" name="lName" required><br><br>
-         <div class="student name error"></div>
          <label for="username">Username:</label>
-         <input type="email" name="username" required /><br><br>
-         <div class="student username error"></div>
+         <input type="email" name="username" required />
+         <div class="formError" id="student username error"></div> <br>
          <label for="password">Password:</label>
          <input type="password" name="password" required />
-         <div class="student password error"></div><br>
+         <div class="formError" id="student password error"></div><br>
          <button>Sign Up</button>
       </form>
       </div>
@@ -39,11 +38,11 @@
          <label for="lName">Last Name: </label>
          <input type="text" name="lName" required><br><br>
          <label for="username">Username:</label>
-         <input type="email" name="username" required /><br><br>
-         <div class="username error"></div>
+         <input type="email" name="username" required />
+         <div class="formError" id="username error"></div><br>
          <label for="password">Password:</label>
-         <input type="password" name="password" required /><br><br>
-         <div class="password error"></div>
+         <input type="password" name="password" required />
+         <div class="formError" id="password error"></div><br>
          <label for="department">Department:</label>
          <input type="text" name="department" required><br><br>
          <button>Sign Up</button>
@@ -53,15 +52,13 @@
      <script>
            //student
     const studentForm = document.getElementById('studentForm');
-    const studentnameError = document.getElementsByName('student name error');
-    const studentusernameError = document.getElementsByName('student username error');
-    const studentpasswordError = document.getElementsByName('student password error');
+    const studentusernameError = document.getElementById('student username error');
+    const studentpasswordError = document.getElementById('student password error');
 
     studentForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         //reset errors
-        studentnameError.textContent = '';
         studentusernameError.textContent = '';
         studentpasswordError.textContent = '';
 
@@ -80,7 +77,6 @@
             const data = await res.json();
             console.log(data);
             if(data.errors) {
-                studentnameError.textContent = data.errors.name;
                 studentusernameError.textContent = data.errors.username;
                 studentpasswordError.textContent = data.errors.password;
 
@@ -96,19 +92,15 @@
 
     //teacher
     const teacherForm = document.getElementById('teacherForm');
-    const teachernameError = document.getElementsByName('teacher name error');
-    const teacherusernameError = document.getElementsByName('teacher username error');
-    const teacherpasswordError = document.getElementsByName('teacher password error');
-    const teacherdepartmentError = document.getElementsByName('teacher department error');
+    const teacherusernameError = document.getElementById('teacher username error');
+    const teacherpasswordError = document.getElementById('teacher password error');
 
     teacherForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         //reset errors
-        teachernameError.textContent = '';
         teacherusernameError.textContent = '';
         teacherpasswordError.textContent = '';
-        teacherdepartmentError.textContent = '';
 
         //get the values
         const fName = teacherForm.fName.value;
@@ -125,10 +117,8 @@
             });
             const data = await res.json();
             if(data.errors) {
-                teachernameError.textContent = data.errors.name;
                 teacherusernameError.textContent = data.errors.username;
                 teacherpasswordError.textContent = data.errors.password;
-                teacherdepartmentError.textContent = data.errors.department;
             }
             if(data.teacher) {
                 location.assign('/');

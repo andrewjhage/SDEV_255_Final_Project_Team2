@@ -14,11 +14,11 @@
       <form id="studentForm">
         <h2>Student Log In</h2>
          <label for="username">Username</label>
-         <input type="text" name="username"/><br><br>
-         <div class="student username error"></div>
+         <input type="text" name="username"/>
+         <div class="formError" id="student username error"></div><br>
          <label for="password">Password</label>
-         <input type="password" name="password"/><br>
-         <div class="student password error"></div>
+         <input type="password" name="password"/>
+         <div class="formError" id="student password error"></div><br>
          <button>Log In</button>
       </form>
       </div>
@@ -28,11 +28,11 @@
       <form id="teacherForm">
         <h2>Teacher Log In</h2>
          <label for="username">Username</label>
-         <input type="text" name="username"/><br><br>
-         <div class="username error"></div>
+         <input type="text" name="username"/>
+         <div class="formError" id="teacher username error"></div><br>
          <label for="password">Password</label>
-         <input type="password" name="password"/><br>
-         <div class="password error"></div>
+         <input type="password" name="password"/>
+         <div  class="formError" id="teacher password error"></div><br>
          <button>Log In</button>
       </form>
     </div>
@@ -40,12 +40,12 @@
       <script>
     //student
     const studentForm = document.getElementById('studentForm');
-    const studentusernameError = document.getElementsByName('student username error');
-    const studentpasswordError = document.getElementsByName('student password error');
+    const studentusernameError = document.getElementById('student username error');
+    const studentpasswordError = document.getElementById('student password error');
     //teacher
     const teacherForm = document.getElementById('teacherForm');
-    const teacherusernameError = document.getElementsByName('teacher username error');
-    const teacherpasswordError = document.getElementsByName('teacher password error');
+    const teacherusernameError = document.getElementById('teacher username error');
+    const teacherpasswordError = document.getElementById('teacher password error');
     
     studentForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -57,6 +57,7 @@
         //get the values
         const username = studentForm.username.value;
         const password = studentForm.password.value;
+        console.log(username);
 
         try {
             const res = await fetch('/student/login', {

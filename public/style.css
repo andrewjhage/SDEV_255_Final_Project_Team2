@@ -114,6 +114,10 @@ h5.courseName {
   margin-right: 25px;
 }
 
+.formError {
+  color: red;
+}
+
 .footer {
   color: white;
   background-color: #292b2c;

@@ -7,16 +7,23 @@
   <!-- Navbar-->
   <%- include("./partials/nav.ejs") %>
 
+  <h2>Account Info:</h2>
+    <h5>Name: </h5> <h6> <%= user.fName%> <%= user.lName%> </h6>
+    <h5>Username: </h5> <h6><%= user.username%></h6>
+
 
   <% if (teacher) { %> 
+    <h5>Department: </h5> <h6><%= user.department%></h6>
     <input type="button" onclick="location.href='/courses/create'" value="Create a Class" />
   <% } else { %>
     <h2>Current Schedule: </h2>
     <% if (classList.length > 0) { %>
       <ul>
         <% classList.forEach(course => { %>
-          <p><%= course%></p> <input type="button" onclick="dropClass('<%= course%>')" value="Drop" class="dropBtn"/>
+          <div>
+          <h2 class="courseNumber" style="display:inline-flex"><%= course%></h2> <input type="button" style="display:inline-flex" onclick="dropClass('<%= course%>')" value="Drop" class="dropBtn"/>
           <% }) %>
+        </div><br><br>
       </ul>
   <% } else { %>
       <p>You are currently not enrolled in any classes.</p>
