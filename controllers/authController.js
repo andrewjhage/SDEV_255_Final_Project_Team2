@@ -33,6 +33,7 @@ const handleErrors = (err) => {
       errors[properties.path] = properties.message;
     });
   }
+  console.log(errors);
 
   return errors;
 }
@@ -92,8 +93,7 @@ const student_login_post = async (req, res) => {
     const token = createUserToken(student._id);
     res.cookie('user', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ student: student._id });
-  }
-  catch (err) {
+  } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
   }
