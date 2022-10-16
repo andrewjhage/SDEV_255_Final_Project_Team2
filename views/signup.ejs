@@ -39,10 +39,10 @@
          <input type="text" name="lName" required><br><br>
          <label for="username">Username:</label>
          <input type="email" name="username" required />
-         <div class="formError" id="username error"></div><br>
+         <div class="formError" id="teacher username error"></div><br>
          <label for="password">Password:</label>
          <input type="password" name="password" required />
-         <div class="formError" id="password error"></div><br>
+         <div class="formError" id="teacher password error"></div><br>
          <label for="department">Department:</label>
          <input type="text" name="department" required><br><br>
          <button>Sign Up</button>
@@ -81,7 +81,7 @@
                 studentpasswordError.textContent = data.errors.password;
 
             }
-            if(data.user) {
+            if(data.student) {
                 location.assign('/');
             }
 
