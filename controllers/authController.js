@@ -18,7 +18,7 @@ const handleErrors = (err) => {
 
   // duplicate username error
   if (err.code === 11000) {
-    errors.username = 'that username is already registered';
+    errors.username = 'That username is already registered';
     return errors;
   }
 
@@ -92,6 +92,7 @@ const student_login_post = async (req, res) => {
     res.status(200).json({ student: student._id });
   } 
   catch (err) {
+    console.log(err);
     const errors = handleErrors(err);
     res.status(400).json({ errors });
   }

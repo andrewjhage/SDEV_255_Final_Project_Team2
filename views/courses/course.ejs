@@ -24,8 +24,10 @@
           <% if (courses.length > 0) { %>
               <% courses.forEach(course => { %>
               <a class="single" href="/courses/<%= course._id%>">
+                <div id="courseStyle">
                   <h2 class="courseNumber"> <%= course.courseNumber%></h2>
-                  <h3 class="courseName"><%= course.courseName%></h3>
+                  <h5 class="courseName"><%= course.courseName%></h3>
+                </div>
               </a>
               <% }) %>
           <% } else { %>

@@ -1,5 +1,122 @@
-@media(min-width: 768px) {
-    .news-input {
-        width: 50%;
-    }
+
+.card{
+    width: 400px;
+    border:none;
+}
+.btr{
+    border-top-right-radius: 5px !important;
+}
+.btl{
+    border-top-left-radius: 5px !important;
+}
+.btn-dark {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+.btn-dark:hover {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+.form{
+    padding: 10px;
+      height: 300px;
+}
+.form input{
+    margin-bottom: 12px;
+    border-radius: 3px;
+}
+.form input:focus{
+    box-shadow: none;
+}
+.form button{
+    margin-top: 20px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+#courseStyle {
+  border: solid 2px black;
+  border-radius: 10px;
+  box-shadow: 2px 2px;
+  padding-left: 1em;
+  margin: 10px;
+  width: 8em;
+  
+}
+
+#displayCourses {
+  width: max-content;
+}
+
+h2.courseNumber {
+    font-size: 24px;
+    font-family: Calibri;
+    color: #444;
+    font-weight: 700;
+    line-height: 1.25em;
+    margin-top: 0;
+    text-decoration: none;
+  
+}
+
+h5.courseName {
+    font-size: 18px;
+    font-family: Calibri;
+    color: #444;
+    font-weight: 500;
+    line-height: 1.25em;
+    margin-top: 0;
+    text-decoration: none;
+}
+
+#loginForm {
+  display: inline-flex;
+  margin-left: 30%;
+  margin-top: 20px;
+  padding: 15px;
+  border: solid 2px black;
+  border-radius: 5px;
+  box-shadow: 2px 2px;
+  
+}
+
+#firstForm {
+  margin-right: 15px;
+}
+#signupForm {
+  display: inline-flex;
+  margin-left: 25%;
+  margin-top: 20px;
+  padding: 15px;
+  border: solid 2px black;
+  border-radius: 5px;
+  box-shadow: 2px 2px;
+  
+}
+
+#firstSignupForm {
+  margin-right: 25px;
+}
+
+.footer {
+  color: white;
+  background-color: #292b2c;
+  margin-bottom: -5em;
+  margin-top: 25px;
 }

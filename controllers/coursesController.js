@@ -85,17 +85,3 @@ module.exports = {
     delete_redirect
 };
 
-//Alter (temp to save code)
-// app.post('/account', (req, res) => {
-//     const course = new Course(req.body);
-  
-//     course.save()
-//     .then((result) => {
-//         res.redirect('/courses')
-  
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     });
-  
-//   });
